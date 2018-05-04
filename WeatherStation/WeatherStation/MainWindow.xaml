@@ -105,14 +105,74 @@
     <Grid Background="#FF1B2028">
 
         <Grid HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="1000" Background="#FF0166CF" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
-            <Label Content="Stacja pogodowa" HorizontalAlignment="Left" Margin="30,5,0,0" VerticalAlignment="Top" Height="35" Width="765" FontFamily="Century Gothic" Background="{x:Null}" Foreground="White" FontSize="17"/>
+            <Label x:Name="titleLabel" Content="Stacja pogodowa" HorizontalAlignment="Left" Margin="30,5,0,0" VerticalAlignment="Top" Height="35" Width="765" FontFamily="Century Gothic" Background="{x:Null}" Foreground="White" FontSize="17"/>
             <Button x:Name="exit_button" Content="X" HorizontalAlignment="Left" Margin="948,0,0,0" VerticalAlignment="Top" Width="52" Height="40" Background="#FF0166CF" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource exitButton_Style}" Click="navButton_Click" FontSize="16"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="30" Margin="0,40,0,0" VerticalAlignment="Top" Width="1000" Background="#FF242E3A">
-            <Button x:Name="navButton_close" Content="Ustawienia" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="130" Background="#FF242E3A" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Century Gothic" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}" Margin="260,0,0,0"/>
-            <Button x:Name="navButton_close_Copy" Content="Jutro" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="130" Background="#FF242E3A" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Century Gothic" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}" Margin="130,0,0,0"/>
-            <Button x:Name="navButton_close_Copy1" Content="Info" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="130" Background="#FF242E3A" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Century Gothic" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}" Margin="390,0,0,0"/>
-            <Button x:Name="navButton_close_Copy2" Content="Dzisiaj" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="130" Background="#FF242E3A" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Century Gothic" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}"/>
+            <Button x:Name="navButton_settings" Content="Ustawienia" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="130" Background="#FF242E3A" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Century Gothic" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}" Margin="260,0,0,0"/>
+            <Button x:Name="navButton_forecast" Content="Prognoza" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="130" Background="#FF242E3A" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Century Gothic" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}" Margin="130,0,0,0"/>
+            <Button x:Name="navButton_author" Content="Autor" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="130" Background="#FF242E3A" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Century Gothic" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}" Margin="390,0,0,0"/>
+            <Button x:Name="navButton_today" Content="Dzisiaj" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="130" Background="#FF242E3A" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Century Gothic" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}"/>
+        </Grid>
+        <!--today-->
+        <Grid x:Name="Today_Grid" HorizontalAlignment="Left" Height="515" Margin="10,75,0,0" VerticalAlignment="Top" Width="980" Visibility="Hidden">
+            <Label Content="Rzeszów" Margin="148,38,150,397" VerticalAlignment="Center" Height="80" Foreground="White" FontSize="48" FontFamily="Yu Gothic UI" HorizontalContentAlignment="Center"/>
+            <Label Content="22 C" Margin="500,95,330,0" VerticalAlignment="Top" Height="150" FontSize="48" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Image HorizontalAlignment="Left" Height="150" Margin="330,95,0,0" VerticalAlignment="Top" Width="150"/>
+            <Label Content="Temperatura maksymalna:" HorizontalAlignment="Left" Height="40" Margin="30,330,0,0" VerticalAlignment="Top" Width="250" Foreground="White" FontSize="20"/>
+            <Label Content="Temperatura minimalna:" HorizontalAlignment="Left" Height="40" Margin="30,375,0,0" VerticalAlignment="Top" Width="250" Foreground="White" FontSize="20"/>
+            <Label Content="Ciśnienie:" Height="40" Margin="414,330,444,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+            <Label Content="Wilgotność:" Height="40" Margin="414,375,444,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+            <Label Content="Wschód słońca:" Height="40" Margin="666,330,150,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+            <Label Content="Zachód słońca:" Height="40" Margin="666,375,150,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+            <Label Content="Dzisiejsza data" HorizontalAlignment="Left" Height="40" Margin="366,231,0,0" VerticalAlignment="Top" Width="250" Foreground="White" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Grid>
+
+        <!--forecast-->
+        <Grid x:Name="Forecast_Grid" HorizontalAlignment="Left" Height="515" Margin="10,76,0,0" VerticalAlignment="Top" Width="980" Visibility="Hidden">
+
+            <Label Content="Rzeszów" Margin="148,38,150,397" VerticalAlignment="Center" Height="80" Foreground="White" FontSize="48" FontFamily="Yu Gothic UI" HorizontalContentAlignment="Center"/>
+            <Grid Margin="100,144,730,46" RenderTransformOrigin="0.827,0.492">
+                <Label Content="Sobota" Height="40" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150"/>
+                <Image HorizontalAlignment="Left" Height="150" Margin="0,45,0,0" VerticalAlignment="Top" Width="150"/>
+                <Label Content="Sobota" Height="40" Margin="0,200,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150"/>
+                <Label Content="Sobota" Height="40" Margin="0,245,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150"/>
+                <Label Content="Sobota" Height="40" Margin="0,285,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150"/>
+            </Grid>
+            <Grid Margin="730,144,100,46" RenderTransformOrigin="0.827,0.492">
+                <Label Content="Sobota" Height="40" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150"/>
+                <Image HorizontalAlignment="Left" Height="150" Margin="0,45,0,0" VerticalAlignment="Top" Width="150"/>
+                <Label Content="Sobota" Height="40" Margin="0,200,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150"/>
+                <Label Content="Sobota" Height="40" Margin="0,245,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150"/>
+                <Label Content="Sobota" Height="40" Margin="0,285,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150"/>
+            </Grid>
+            <Grid Margin="416,144,414,46" RenderTransformOrigin="0.827,0.492">
+                <Label Content="Sobota" Height="40" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150"/>
+                <Image HorizontalAlignment="Left" Height="150" Margin="0,45,0,0" VerticalAlignment="Top" Width="150"/>
+                <Label Content="Sobota" Height="40" Margin="0,200,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150"/>
+                <Label Content="Sobota" Height="40" Margin="0,245,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150"/>
+                <Label Content="Sobota" Height="40" Margin="0,285,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150"/>
+            </Grid>
+        </Grid>
+
+        <!--Settings -->
+        <Grid x:Name="Settings_Grid" HorizontalAlignment="Left" Height="515" Margin="10,76,0,0" VerticalAlignment="Top" Width="980" Visibility="Visible">
+            <Label Content="Nazwa miejscowości:" HorizontalAlignment="Left" Height="40" Margin="60,171,0,0" VerticalAlignment="Top" Width="250" Foreground="White" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <TextBox HorizontalAlignment="Left" Height="40" Margin="310,171,0,0" TextWrapping="Wrap" Text="Rzeszów" VerticalAlignment="Top" Width="429" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#FF0B121B" Background="#FF282E38" SelectionBrush="#FF072034" Foreground="White"/>
+            <Button Content="Szukaj" HorizontalAlignment="Left" Margin="788,171,0,0" VerticalAlignment="Top" Width="100" Height="40" FontSize="20"/>
+            <Label Content="Podana miejscowość nie insnieje." Margin="266,310,264,0" VerticalAlignment="Top" Height="50" Foreground="Red" Width="450" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18"/>
+
+        </Grid>
+
+        <!--author-->
+        <Grid x:Name="Author_Grid" HorizontalAlignment="Left" Height="516" Margin="10,75,0,0" VerticalAlignment="Top" Width="980" Visibility="Hidden">
+            <Label Content="Autor:" Height="40" Margin="260,155,556,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+            <Label Content="Projekt zaliczeniowy Szkolenie Techniczne 1 " Height="60" Margin="150,44,150,0" VerticalAlignment="Top" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Content="Numer albumu:" Height="40" Margin="260,200,556,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+            <Label Content="Kod źródłowy projektu:" Height="40" Margin="260,244,502,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+            <Label Content="Wojciech Marek" Height="40" Margin="509,155,307,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+            <Label Content="57108" Height="40" Margin="509,200,307,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+            <Label Content="Link" Height="40" Margin="509,244,307,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
         </Grid>
 
     </Grid>
