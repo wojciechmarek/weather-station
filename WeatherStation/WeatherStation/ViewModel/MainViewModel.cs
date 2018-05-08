@@ -1,12 +1,14 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using WeatherStation.Model.Mappings;
 using WeatherStation.Model.Services;
+
 
 
 namespace WeatherStation.ViewModel
@@ -25,7 +27,6 @@ namespace WeatherStation.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        private const string DEFAULT_CITY = "Rzeszow";
 
         #region Objects Declarations for Grids
 
@@ -183,7 +184,7 @@ namespace WeatherStation.ViewModel
             }
         }
 
-        private BitmapImage todayImage = new BitmapImage(new Uri($@"http://openweathermap.org/img/w/09d.png"));
+        private BitmapImage todayImage;
         public BitmapImage TodayImage
         {
             get { return todayImage; }
@@ -194,13 +195,11 @@ namespace WeatherStation.ViewModel
         }
 
 
-        //todo : image icon
-
 
         //forecast grid
+        static CultureInfo culture = new CultureInfo("pl-PL");
 
-
-        private string nextDay1 = DateTime.Now.AddDays(1).DayOfWeek.ToString();
+        private string nextDay1 = DateTime.Now.AddDays(1).ToString("dddd", culture);
         public string NextDay1
         {
             get { return nextDay1; }
@@ -210,7 +209,7 @@ namespace WeatherStation.ViewModel
             }
         }
 
-        private string nextDay2 = DateTime.Now.AddDays(2).DayOfWeek.ToString();
+        private string nextDay2 = DateTime.Now.AddDays(2).ToString("dddd", culture);
         public string NextDay2
         {
             get { return nextDay2; }
@@ -220,7 +219,7 @@ namespace WeatherStation.ViewModel
             }
         }
 
-        private string nextDay3 = DateTime.Now.AddDays(3).DayOfWeek.ToString();
+        private string nextDay3 = DateTime.Now.AddDays(3).ToString("dddd", culture);
         public string NextDay3
         {
             get { return nextDay3; }
@@ -320,7 +319,7 @@ namespace WeatherStation.ViewModel
             }
         }
 
-        private BitmapImage nextDay1image = new BitmapImage(new Uri($@"http://openweathermap.org/img/w/09d.png"));
+        private BitmapImage nextDay1image;
         public BitmapImage NextDay1image
         {
             get { return nextDay1image; }
@@ -330,7 +329,7 @@ namespace WeatherStation.ViewModel
             }
         }
 
-        private BitmapImage nextDay2image = new BitmapImage(new Uri($@"http://openweathermap.org/img/w/09d.png"));
+        private BitmapImage nextDay2image;
         public BitmapImage NextDay2image
         {
             get { return nextDay2image; }
@@ -340,7 +339,7 @@ namespace WeatherStation.ViewModel
             }
         }
 
-        private BitmapImage nextDay3image = new BitmapImage(new Uri($@"http://openweathermap.org/img/w/09d.png"));
+        private BitmapImage nextDay3image;
         public BitmapImage NextDay3image
         {
             get { return nextDay3image; }
@@ -374,38 +373,22 @@ namespace WeatherStation.ViewModel
 
         #endregion
 
+        private const string DEFAULT_CITY = "Rzeszow";
+        private readonly IDataAccessServices dataAccessServices;
+        Services services = new Services();
 
-        //Today today;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel()
+        public MainViewModel(IDataAccessServices dataAccessServices)
         {
+            this.dataAccessServices = dataAccessServices;
+
             InitializeEvents();
             
+            ProcessData(DEFAULT_CITY);
 
-            //services = new Services();
-            //today = services.GetTodayWeather("kolbuszowa");
-            //forecast = services.GetForecast("kolbuszowa");
-
-           // var x = services.GetTodayWeather("kolbuszowa");
-
-            //.WriteLine(forecast.cod);
-
-            //Forecast forecast = services.GetForecast("Kolbuszowa");
-            //var today = services.GetTodayWeather("kolbuszowa");
-            //var x = today.Name;
-            //var x = today.cod;
-
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
         }
 
         
@@ -417,7 +400,7 @@ namespace WeatherStation.ViewModel
 
         private void CitySearch()
         {
-            MessageBox.Show(CityNameToSearch);
+            ProcessData(CityNameToSearch);
         }
 
         
@@ -431,16 +414,82 @@ namespace WeatherStation.ViewModel
 
         }
 
+        private void ProcessData(string City)
+        {
+            RegionInfo regionInfo;
+
+            dataAccessServices.GetToday(
+                (item, error) =>
+                {
+                    if (error != null)
+                    {
+                        CityNotFound = error.InnerException.Message;
+                        return;
+                    }
+                    else
+                    {
+                        CityNotFound = string.Empty;
+                        TodayGridVisibilityFunction();
+                    }
+
+                    regionInfo = new RegionInfo(item.sys.country);
+
+                    TodayTemperature = (int)item.main.temp - 273;
+                    TemperatureMin = (int)item.main.temp_min - 273;
+                    TemperatureMax = (int)item.main.temp_max - 273;
+                    TodayHumidity = item.main.humidity;
+                    TodayPressure = (int)item.main.pressure;
+                    TodayImage = new BitmapImage(new Uri($@"http://openweathermap.org/img/w/{item.weather[0].icon}.png"));
+
+
+                    var dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(item.sys.sunrise);
+                    TodaySunrise = dateTimeOffset.LocalDateTime.ToShortTimeString();
+                   
+                    dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(item.sys.sunset);
+                    TodaySunset = dateTimeOffset.LocalDateTime.ToShortTimeString();
+
+                    CityName = item.Name + ", " + regionInfo.DisplayName;
+
+                }, City);
+
+            dataAccessServices.GetForecast(
+                (item, error) =>
+                {
+                    if (error != null)
+                    {
+                        CityNotFound = error.InnerException.Message;
+                        return;
+                    }
+                    else
+                    {
+                        CityNotFound = string.Empty;
+                    }
+
+                    NextDay1image = new BitmapImage(new Uri($@"http://openweathermap.org/img/w/{item.list[8].weather[0].icon}.png"));
+                    NextDay2image = new BitmapImage(new Uri($@"http://openweathermap.org/img/w/{item.list[16].weather[0].icon}.png"));
+                    NextDay3image = new BitmapImage(new Uri($@"http://openweathermap.org/img/w/{item.list[24].weather[0].icon}.png"));
+
+                    NextDay1temp = (int)item.list[8].main.temp - 273;
+                    NextDay2temp = (int)item.list[16].main.temp - 273;
+                    NextDay3temp = (int)item.list[24].main.temp - 273;
+
+                    NextDay1pressure = (int)item.list[8].main.pressure;
+                    NextDay2pressure = (int)item.list[16].main.pressure;
+                    NextDay3pressure = (int)item.list[24].main.pressure;
+
+                    NextDay1himidity = (int)item.list[8].main.humidity;
+                    NextDay2himidity = (int)item.list[16].main.humidity;
+                    NextDay3himidity = (int)item.list[24].main.humidity;
+
+                }, City);
+        }
+
         private void ChangeGrid(object o)
         {
             switch (o.ToString())
             {
                 case "today":
-                    TodayGridVisibility = true;
-                    ForecastGridVisibility = false;
-                    SettingsGridVisibility = false;
-                    AuthorGridVisibility = false;
-                    TitleLabel = "Dzisiaj";
+                    TodayGridVisibilityFunction();
                     break;
 
                 case "forecast":
@@ -470,6 +519,15 @@ namespace WeatherStation.ViewModel
 
                     break;
             }
+        }
+
+        private void TodayGridVisibilityFunction()
+        {
+            TodayGridVisibility = true;
+            ForecastGridVisibility = false;
+            SettingsGridVisibility = false;
+            AuthorGridVisibility = false;
+            TitleLabel = "Dzisiaj";
         }
 
         

@@ -11,14 +11,12 @@ namespace WeatherStation.Model.Mappings
         public string cod { get; set; }
 
         public List<Weathers> list { get; set; }
+        
     }
-
+    
     public class Weathers
     {
-        public double temp { get; set; }
-        public double pressure { get; set; }
-        public int humidity { get; set; }
-        public string icon { get; set; }
-        public string dt_txt { get; set; }
+        public Main main { get; set; }
+        public Weather[] weather { get; set; }
     }
 }

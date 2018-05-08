@@ -14,33 +14,44 @@ namespace WeatherStation.Model.Services
     {
         const string API_KEY = "06c772d9626be9e6298e5a2f2c912935";
 
+        HttpClient httpClient = new HttpClient();
 
-        public Today GetTodayWeather(string cityName)
+        public Today GetTodayWeather(string cityName, Action<Exception> exceptionCall)
         {
-            var querry = string.Format($@"http://api.openweathermap.org/data/2.5/weather?q={cityName}&APPID={API_KEY}");
-            var jsonData = GetJsonString(querry).Result;
-            Today today = JsonConvert.DeserializeObject<Today>(jsonData);
-            return today;
-        }
-
-        public Forecast GetForecast(string cityName)
-        {
-            var querry = string.Format($@"http://api.openweathermap.org/data/2.5/forecast?q={cityName}&APPID={API_KEY}");
-            var jsonData = GetJsonString(querry).Result;
-            Forecast forecast = JsonConvert.DeserializeObject<Forecast>(jsonData);
-            return forecast;
-        }
-
-        private async Task<string> GetJsonString(string querry)
-        {
-            HttpClient httpClient = new HttpClient();
-            return await Task.Run(() =>
+            try
             {
-               return httpClient.GetStringAsync(querry);
-            });
+                var querry = string.Format($@"http://api.openweathermap.org/data/2.5/weather?q={cityName}&APPID={API_KEY}");
+                var jsonData = httpClient.GetStringAsync(querry).Result;
+                Today today = JsonConvert.DeserializeObject<Today>(jsonData);
+                return today;
+            }
+            catch (Exception ex)
+            {
+                exceptionCall(ex);
+                return null;
+            }
+            
         }
 
 
 
+        public Forecast GetForecast(string cityName, Action<Exception> exceptionCall)
+        {
+            try
+            {
+                var querry = string.Format($@"http://api.openweathermap.org/data/2.5/forecast?q={cityName}&APPID={API_KEY}");
+                var jsonData = httpClient.GetStringAsync(querry).Result;
+                Forecast forecast = JsonConvert.DeserializeObject<Forecast>(jsonData);
+                return forecast;
+            }
+            catch (Exception ex)
+            {
+                exceptionCall(ex);
+                return null;
+            }
+
+        }
     }
-}
+}   
+
+

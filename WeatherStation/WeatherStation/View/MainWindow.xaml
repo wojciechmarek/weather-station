@@ -126,21 +126,21 @@
             <Label Content="Nazwa miejscowości:" HorizontalAlignment="Left" Height="40" Margin="60,171,0,0" VerticalAlignment="Top" Width="250" Foreground="White" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <TextBox HorizontalAlignment="Left" Height="40" Margin="310,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="429" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#FF0B121B" Background="#FF282E38" SelectionBrush="#FF072034" Foreground="White" Text="{Binding CityNameToSearch, Mode=TwoWay}"/>
             <Button Content="Szukaj" HorizontalAlignment="Left" Margin="788,171,0,0" VerticalAlignment="Top" Width="100" Height="40" FontSize="20" Command="{Binding SearchLocationButton}"/>
-            <Label Content="{Binding CityNotFound}" Margin="266,310,264,0" VerticalAlignment="Top" Height="50" Foreground="Red" Width="450" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" />
+            <Label Content="{Binding CityNotFound}" Margin="60,310,92,0" VerticalAlignment="Top" Height="50" Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" />
 
         </Grid>
 
         <!--today-->
         <Grid x:Name="Today_Grid" HorizontalAlignment="Left" Height="515" Margin="10,75,0,0" VerticalAlignment="Top" Width="980" Visibility="{Binding TodayGridVisibility, Converter={StaticResource BoolToVis}}">
-            <Label Margin="148,38,150,397" VerticalAlignment="Center" Height="80" Foreground="White" FontSize="48" FontFamily="Yu Gothic UI" HorizontalContentAlignment="Center" Content="{Binding CityName}"/>
+            <Label Margin="30,38,44,397" VerticalAlignment="Center" Height="80" Foreground="White" FontSize="48" FontFamily="Yu Gothic UI" HorizontalContentAlignment="Center" Content="{Binding CityName}"/>
             <Label  Margin="500,95,330,0" VerticalAlignment="Top" Height="150" FontSize="42" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding Path=TodayTemperature}" ContentStringFormat=" {0}°C" />
-            <Image HorizontalAlignment="Left" Height="150" Margin="330,95,0,0" VerticalAlignment="Top" Width="150" Source="{Binding TodayImage}"/>
+            <Image HorizontalAlignment="Left" Height="199" Margin="333,72,0,0" VerticalAlignment="Top" Width="200" Source="{Binding TodayImage}" Stretch="Fill"/>
             <Label HorizontalAlignment="Left" Height="40" Margin="30,330,0,0" VerticalAlignment="Top" Width="298" Foreground="White" FontSize="20" Content="{Binding TemperatureMax}" ContentStringFormat="Temperatura maksymalna: {0}°C"/>
             <Label HorizontalAlignment="Left" Height="40" Margin="30,375,0,0" VerticalAlignment="Top" Width="298" Foreground="White" FontSize="20" Content="{Binding TemperatureMin}" ContentStringFormat="Temperatura minimalna: {0}°C"/>
             <Label Height="40" Margin="414,330,364,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Content="{Binding TodayPressure}" ContentStringFormat="Ciśnienie:  {0} hPa"/>
             <Label Height="40" Margin="414,375,364,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Content="{Binding TodayHumidity}" ContentStringFormat="Wilgotność: {0} %"/>
-            <Label Height="40" Margin="666,330,44,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Content="{Binding TodaySunrise}" ContentStringFormat="Wschód słońca: {0}"/>
-            <Label Height="40" Margin="666,375,44,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Content="{Binding TodaySunset}" ContentStringFormat="Zachód słońca:  {0}"/>
+            <Label Height="40" Margin="666,330,44,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Content="{Binding TodaySunrise}" ContentStringFormat="Wschód słońca: {0} CEST"/>
+            <Label Height="40" Margin="666,375,44,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Content="{Binding TodaySunset}" ContentStringFormat="Zachód słońca:  {0} CEST"/>
             <Label HorizontalAlignment="Left" Height="40" Margin="366,231,0,0" VerticalAlignment="Top" Width="250" Foreground="White" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding Source={x:Static sys:DateTime.Now}}" ContentStringFormat=" {0:D} " Language="pl-PL"/>
         </Grid>
 
@@ -150,24 +150,24 @@
             <Label  Margin="148,38,150,397" VerticalAlignment="Center" Height="80" Foreground="White" FontSize="48" FontFamily="Yu Gothic UI" HorizontalContentAlignment="Center" Content="{Binding CityName}"/>
             <Grid Margin="100,144,730,46" RenderTransformOrigin="0.827,0.492">
                 <Label Height="40" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150" Content="{Binding NextDay1}" Language="pl-PL"/>
-                <Image HorizontalAlignment="Left" Height="150" Margin="0,45,0,0" VerticalAlignment="Top" Width="150" Source="{Binding NextDay1image}"/>
-                <Label Height="40" Margin="0,200,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150" Content="{Binding NextDay1temp}" ContentStringFormat="Temperatura: {0}°C"/>
-                <Label Height="40" Margin="0,245,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150" Content="{Binding NextDay1pressure}" ContentStringFormat="Ciśnienie: {0}°C"/>
-                <Label Height="40" Margin="0,285,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150" Content="{Binding NextDay1himidity}" ContentStringFormat="Wigotność: {0}°C"/>
+                <Image HorizontalAlignment="Left" Height="130" Margin="10,65,0,0" VerticalAlignment="Top" Width="130" Source="{Binding NextDay1image}"/>
+                <Label Height="40" Margin="-18,200,-17,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding NextDay1temp}" ContentStringFormat="Temperatura: {0}°C"/>
+                <Label Height="40" Margin="-18,245,-17,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding NextDay1pressure}" ContentStringFormat="Ciśnienie: {0} hPa"/>
+                <Label Height="40" Margin="-18,290,-17,-5" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding NextDay1himidity}" ContentStringFormat="Wigotność: {0} %"/>
             </Grid>
             <Grid Margin="416,144,414,46" RenderTransformOrigin="0.827,0.492">
                 <Label Height="40" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150" Content="{Binding NextDay2}" Language="pl-PL"/>
-                <Image HorizontalAlignment="Left" Height="150" Margin="0,45,0,0" VerticalAlignment="Top" Width="150" Source="{Binding NextDay2image}"/>
-                <Label Height="40" Margin="0,200,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150" Content="{Binding NextDay2temp}"  ContentStringFormat="Temperatura: {0}°C"/>
-                <Label Height="40" Margin="0,245,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150" Content="{Binding NextDay2pressure}" ContentStringFormat="Ciśnienie: {0}°C"/>
-                <Label Height="40" Margin="0,285,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150" Content="{Binding NextDay2himidity}" ContentStringFormat="Wigotność: {0}°C"/>
+                <Image HorizontalAlignment="Left" Height="130" Margin="10,65,0,0" VerticalAlignment="Top" Width="130" Source="{Binding NextDay2image}"/>
+                <Label Height="40" Margin="-17,200,-17,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding NextDay2temp}"  ContentStringFormat="Temperatura: {0}°C"/>
+                <Label Height="40" Margin="-17,245,-17,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding NextDay2pressure}" ContentStringFormat="Ciśnienie: {0} hPa"/>
+                <Label Height="40" Margin="-17,290,-17,-5" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding NextDay2himidity}" ContentStringFormat="Wigotność: {0} %"/>
             </Grid>
             <Grid Margin="730,144,100,46" RenderTransformOrigin="0.827,0.492">
                 <Label Height="40" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150" Content="{Binding NextDay3}" Language="pl-PL"/>
-                <Image HorizontalAlignment="Left" Height="150" Margin="0,45,0,0" VerticalAlignment="Top" Width="150" Source="{Binding NextDay3image}"/>
-                <Label Height="40" Margin="0,200,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150" Content="{Binding NextDay3temp}"  ContentStringFormat="Temperatura: {0}°C"/>
-                <Label Height="40" Margin="0,245,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150" Content="{Binding NextDay3pressure}" ContentStringFormat="Ciśnienie: {0}°C"/>
-                <Label Height="40" Margin="0,285,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150" Content="{Binding NextDay3himidity}"  ContentStringFormat="Wigotność: {0}°C"/>
+                <Image HorizontalAlignment="Left" Height="130" Margin="10,65,0,0" VerticalAlignment="Top" Width="130" Source="{Binding NextDay3image}"/>
+                <Label Height="40" Margin="-17,200,-17,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding NextDay3temp}"  ContentStringFormat="Temperatura: {0}°C"/>
+                <Label Height="40" Margin="-17,245,-17,0" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding NextDay3pressure}" ContentStringFormat="Ciśnienie: {0} hPa"/>
+                <Label Height="40" Margin="-17,290,-17,-5" VerticalAlignment="Top" Foreground="White" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding NextDay3himidity}"  ContentStringFormat="Wigotność: {0} %"/>
             </Grid>
         </Grid>
 

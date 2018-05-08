@@ -24,7 +24,7 @@ namespace WeatherStation.Model.Mappings
     public class Main
     {
         public double temp { get; set; }
-        public int pressure { get; set; }
+        public double pressure { get; set; }
         public int humidity { get; set; }
         public double temp_min { get; set; }
         public double temp_max { get; set; }
@@ -34,5 +34,6 @@ namespace WeatherStation.Model.Mappings
     {
         public long sunrise { get; set; }
         public long sunset { get; set; }
+        public string country { get; set; }
     }
 }

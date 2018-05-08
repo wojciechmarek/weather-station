@@ -15,6 +15,7 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using WeatherStation.Model.Services;
 //using Microsoft.Practices.ServiceLocation;
 
 namespace WeatherStation.ViewModel
@@ -40,7 +41,7 @@ namespace WeatherStation.ViewModel
             ////else
             ////{
             ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
+                SimpleIoc.Default.Register<IDataAccessServices, DataAccessServices>();
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
