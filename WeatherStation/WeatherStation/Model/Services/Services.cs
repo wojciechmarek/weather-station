@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -12,15 +13,15 @@ namespace WeatherStation.Model.Services
 
     public class Services
     {
-        const string API_KEY = "06c772d9626be9e6298e5a2f2c912935";
-
         HttpClient httpClient = new HttpClient();
+        string api_key = ConfigurationManager.AppSettings["private_api_key"];
 
         public Today GetTodayWeather(string cityName, Action<Exception> exceptionCall)
         {
             try
             {
-                var querry = string.Format($@"http://api.openweathermap.org/data/2.5/weather?q={cityName}&APPID={API_KEY}");
+                var url = ConfigurationManager.AppSettings["today_url"];
+                var querry = string.Format(url+"{0}+&APPID={1}", cityName, api_key );
                 var jsonData = httpClient.GetStringAsync(querry).Result;
                 Today today = JsonConvert.DeserializeObject<Today>(jsonData);
                 return today;
@@ -39,7 +40,8 @@ namespace WeatherStation.Model.Services
         {
             try
             {
-                var querry = string.Format($@"http://api.openweathermap.org/data/2.5/forecast?q={cityName}&APPID={API_KEY}");
+                var url = ConfigurationManager.AppSettings["forecast_url"];
+                var querry = string.Format(url + "{0}+&APPID={1}", cityName, api_key);
                 var jsonData = httpClient.GetStringAsync(querry).Result;
                 Forecast forecast = JsonConvert.DeserializeObject<Forecast>(jsonData);
                 return forecast;

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WeatherStation.Model.Mappings
 {
+    /// <summary>
+    /// Klasa mapująca aktualną pogodę
+    /// </summary>
     public class Today
     {
         public Weather[] weather { get; set; }
@@ -15,12 +18,18 @@ namespace WeatherStation.Model.Mappings
         public int cod { get; set; }
     }
 
+    /// <summary>
+    /// Klasa mapująca aktualną pogodę
+    /// </summary>
     public class Weather
     {
         public string main { get; set; }
         public string icon { get; set; }
     }
 
+    /// <summary>
+    /// Klasa mapująca aktualną pogodę
+    /// </summary>
     public class Main
     {
         public double temp { get; set; }
@@ -30,6 +39,9 @@ namespace WeatherStation.Model.Mappings
         public double temp_max { get; set; }
     }
 
+    /// <summary>
+    /// Klasa mapująca aktualną pogodę
+    /// </summary>
     public class Sys
     {
         public long sunrise { get; set; }

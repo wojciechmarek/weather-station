@@ -8,6 +8,9 @@ using WeatherStation.Model.Mappings;
 
 namespace WeatherStation.Model.Services
 {
+    /// <summary>
+    /// Interfejs dostarczający prototypy funkcji do obsługi zapytań serwera.
+    /// </summary>
     public interface IDataAccessServices
     {
         void GetToday(Action<Today, Exception> callback, string CityName);

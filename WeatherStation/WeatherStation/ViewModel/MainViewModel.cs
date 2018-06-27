@@ -377,10 +377,6 @@ namespace WeatherStation.ViewModel
         private readonly IDataAccessServices dataAccessServices;
         Services services = new Services();
 
-
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
         public MainViewModel(IDataAccessServices dataAccessServices)
         {
             this.dataAccessServices = dataAccessServices;
@@ -391,8 +387,6 @@ namespace WeatherStation.ViewModel
 
         }
 
-        
-
         private void CloseApp()
         {
             Environment.Exit(0);
@@ -402,18 +396,14 @@ namespace WeatherStation.ViewModel
         {
             ProcessData(CityNameToSearch);
         }
-
         
-
         private void InitializeEvents()
         {
             SearchLocationButton = new RelayCommand(CitySearch);
             CloseApplicationButton = new RelayCommand(CloseApp);
-
             NavigationButtons = new RelayCommand<object>(ChangeGrid);
-
         }
-
+       
         private void ProcessData(string City)
         {
             RegionInfo regionInfo;
@@ -477,9 +467,9 @@ namespace WeatherStation.ViewModel
                     NextDay2pressure = (int)item.list[16].main.pressure;
                     NextDay3pressure = (int)item.list[24].main.pressure;
 
-                    NextDay1himidity = (int)item.list[8].main.humidity;
-                    NextDay2himidity = (int)item.list[16].main.humidity;
-                    NextDay3himidity = (int)item.list[24].main.humidity;
+                    NextDay1himidity = item.list[8].main.humidity;
+                    NextDay2himidity = item.list[16].main.humidity;
+                    NextDay3himidity = item.list[24].main.humidity;
 
                 }, City);
         }
@@ -529,7 +519,5 @@ namespace WeatherStation.ViewModel
             AuthorGridVisibility = false;
             TitleLabel = "Dzisiaj";
         }
-
-        
     }
 }

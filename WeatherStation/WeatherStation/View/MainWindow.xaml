@@ -111,7 +111,8 @@
 
     <!--main window-->
     <Grid Background="#FF1B2028">
-
+        
+        <!--Settings -->
         <Grid HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="1000" Background="#FF0166CF" MouseLeftButtonDown="MoveWindow">
             <Label Content="{Binding TitleLabel}" HorizontalAlignment="Left" Margin="30,5,0,0" VerticalAlignment="Top" Height="35" Width="765" FontFamily="Century Gothic" Background="{x:Null}" Foreground="White" FontSize="17"/>
             <Button Content="X" HorizontalAlignment="Left" Margin="948,0,0,0" VerticalAlignment="Top" Width="52" Height="40" Background="#FF0166CF" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource exitButton_Style}" FontSize="16" Command="{Binding CloseApplicationButton}"/>
@@ -171,17 +172,17 @@
             </Grid>
         </Grid>
 
-        <!--Settings -->
+        
 
         <!--author-->
         <Grid x:Name="Author_Grid" HorizontalAlignment="Left" Height="516" Margin="10,75,0,0" VerticalAlignment="Top" Width="980" Visibility="{Binding AuthorGridVisibility, Converter={StaticResource BoolToVis}}">
             <Label Content="Autor:" Height="40" Margin="260,155,556,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
-            <Label Content="Projekt zaliczeniowy Szkolenie Techniczne 1 " Height="60" Margin="150,44,150,0" VerticalAlignment="Top" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Content="Projekt zaliczeniowy na Szkolenie Techniczne 1 " Height="60" Margin="150,44,150,0" VerticalAlignment="Top" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Content="Numer albumu:" Height="40" Margin="260,200,556,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
-            <Label Content="Kod źródłowy projektu:" Height="40" Margin="260,244,502,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+            <Label Content="Semestr i rok:" Height="40" Margin="260,244,502,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
             <Label Content="Wojciech Marek" Height="40" Margin="509,155,307,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
             <Label Content="57108" Height="40" Margin="509,200,307,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
-            <Label Content="Link" Height="40" Margin="509,244,307,0" VerticalAlignment="Top" Foreground="White" FontSize="20" />
+            <Label Content="4IIZ 2017/2018" Height="40" Margin="509,244,307,0" VerticalAlignment="Top" Foreground="White" FontSize="20" />
         </Grid>
 
     </Grid>

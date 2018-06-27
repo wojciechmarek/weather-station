@@ -21,6 +21,7 @@ using WeatherStation.Model.Services;
 namespace WeatherStation.ViewModel
 {
     /// <summary>
+    /// Klasa wymuszona przez bibliotekê MVVM Light
     /// This class contains static references to all the view models in the
     /// application and provides an entry point for the bindings.
     /// </summary>
