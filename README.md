@@ -1,5 +1,5 @@
 # WeatherStation
-Project made when I was on third semester of study.
+Project made in WPF, when I was on third semester of study.
 
 ## Used technologies
 The main purpose of this projects was use and learn Model-View-ViewModel pattern. This project use MVVM Light Library to implement base of pattern. I used also Newtonsoft.Json to convert Json data from api server.
