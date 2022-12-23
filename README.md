@@ -1,8 +1,8 @@
-# WeatherStation
+# Weather Station
 
 This project is showing the current weather in the selected location. It allows you to see the weather (a temperature, an icon, and other stuff) and see the forecast for the next 3 days for that location.
 
-## Purposes
+## Purpose
 
 WeatherStation was made while I was in my second year of study to pass individual projects.
 
