@@ -27,8 +27,8 @@ WeatherStation was made while I was in my second year of study to pass individua
 - Model-View-ViewModel architectural pattern (MVVM)
 - MVVM Light Library
 - Newtonsoft.Json and JSON
-- some kind of API provider 😅
+- OpenWeatherMap API
 
 ## How to run
 
-Take a computer with Windows OS. Install .Net Framework and Visual Studio. Open the project file, and follow the instructions on what else to install, then build and run it. You have to mock the API in some way. Rock.
+Take a computer with Windows OS. Install .Net Framework and Visual Studio. Open the project file, and follow the instructions on what else to install, then build and run it. You have to update the secret key inside the `App.config` file. Rock.
