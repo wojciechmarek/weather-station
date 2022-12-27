@@ -4,7 +4,7 @@ This project is showing the current weather in the selected location. It allows 
 
 ## Purpose
 
-WeatherStation was made while I was in my second year of study to pass individual projects.
+Weather Station was made while I was in my second year of study to pass individual project.
 
 ## Screenshots
 
